@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Learn C</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #0d47a1;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(118, 116, 231, 0.1);
+    }
+
+    section {
+      margin-bottom: 30px;
+    }
+
+    section h2 {
+      color: #0d47a1;
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    section p {
+      line-height: 1.6;
+      color: #333333;
+    }
+
+    footer {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Learn C - Lecture Notes</h1>
+    <p>Start your C programming journey!</p>
+  </header>
+  <div class="container">
+    <section style="font-family: 'Segoe UI', sans-serif; background-color: white; border-radius: 15px; max-width: 900px; margin: 30px auto; color: #4a004e; ">
+  <h2 style="color: #0d47a1;">📘 Introduction to C Language</h2>
+
+  <p><strong>C</strong> is a powerful, general-purpose programming language that was developed in the early 1970s by Dennis Ritchie at Bell Labs. It is often referred to as the "mother of all programming languages" because many modern languages like C++, Java, and Python are based on C.</p>
+
+  <h3 style="color: #1976d2;">📌 Key Characteristics of C:</h3>
+  <ul style="line-height: 1.8;">
+    <li>✅ Structured and procedural language</li>
+    <li>✅ Fast and efficient</li>
+    <li>✅ Offers low-level memory access using pointers</li>
+    <li>✅ Ideal for system programming and embedded systems</li>
+    <li>✅ Portable – C programs can run on different machines with minimal changes</li>
+  </ul>
+
+  <h3 style="color: #1976d2;">💡 Where is C Used?</h3>
+  <ul style="line-height: 1.8;">
+    <li>💻 Operating system development (e.g., Unix, Linux)</li>
+    <li>🔧 Embedded systems and firmware</li>
+    <li>🧮 Compilers and interpreters</li>
+    <li>🎮 Game development engines</li>
+    <li>📱 Mobile and desktop applications (with system-level interaction)</li>
+  </ul>
+
+  <p style="margin-top: 20px;">
+    C continues to be a popular language for both academic and industrial purposes. Learning C helps build a strong foundation in programming, as it teaches core concepts like memory management, data structures, and algorithm development.
+  </p>
+</section>
+<section style="font-family: 'Segoe UI', sans-serif; background-color: white; border-radius: 15px; max-width: 900px; margin: 30px auto; color: #4a004e; ">
+  <h2 style="color: #0d47a1;">📐 Structure of a C Program</h2>
+
+  <p>A basic C program follows a defined structure. Understanding this structure helps in writing error-free and maintainable code. Below is the general syntax of a C program:</p>
+
+  <h3 style="color: #1976d2;">📄 General Structure:</h3>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #4043ec; padding: 15px; border-radius: 10px;">
+    <pre style="margin: 0;"><code>#include &lt;stdio.h&gt;  // Preprocessor Directive
+
+// Main Function
+int main() {
+    // Statement
+    printf("Hello, World!");
+    return 0;
+}</code></pre>
+  </div>
+
+  <h3 style="color: #1976d2;">💡 Explanation of Components:</h3>
+  <ul style="line-height: 1.8;">
+    <li><strong>#include &lt;stdio.h&gt;</strong> – Preprocessor directive that includes the Standard Input Output library for functions like <code>printf()</code> and <code>scanf()</code>.</li>
+    <li><strong>main()</strong> – Starting point of every C program. It’s where execution begins.</li>
+    <li><strong>{ }</strong> – Curly braces define the body of the function or code block.</li>
+    <li><strong>printf()</strong> – A standard function used to display output on the screen.</li>
+    <li><strong>return 0;</strong> – Ends the main function and returns control to the operating system.</li>
+  </ul>
+
+  <h3 style="color: #1976d2;">📌 Key Points:</h3>
+  <ul style="line-height: 1.8;">
+    <li>Each C statement ends with a semicolon <code>;</code></li>
+    <li>Code inside functions is enclosed in curly braces <code>{ }</code></li>
+    <li>Execution of every C program starts from the <code>main()</code> function</li>
+    <li>Whitespace and indentation improve readability but are not mandatory</li>
+  </ul>
+
+  <p style="margin-top: 20px;">
+    🎯 <strong>Tip:</strong> Practice writing small programs using the basic structure to strengthen your understanding of C syntax.
+  </p>
+</section>
+
+<section style="font-family: 'Segoe UI', sans-serif; background-color: white; border-radius: 15px; max-width: 900px; margin: 30px auto; color: #4a004e; ">
+  <h2 style="color: #0d47a1;">🔤 Variables in C</h2>
+
+  <p>In C programming, a <strong>variable</strong> is a container used to store data that can be modified during the execution of a program. Every variable in C must be declared with a data type before it is used.</p>
+
+  <h3 style="color: #1976d2;">📌 Syntax:</h3>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #5d40ec; padding: 10px 15px; border-radius: 10px;">
+    <code>data_type variable_name;</code><br>
+    <code>int age;</code>
+  </div>
+
+  <h3 style="color: #1976d2;">🧠 Example:</h3>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #4e40ec; padding: 10px 15px; border-radius: 10px;">
+    <pre style="margin: 0;"><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int age = 20;
+    float weight = 60.5;
+    char grade = 'A';
+
+    printf("Age: %d\n", age);
+    printf("Weight: %.1f\n", weight);
+    printf("Grade: %c\n", grade);
+    return 0;
+}</code></pre>
+  </div>
+
+  <h3 style="color: #1976d2;">📚 Types of Variables:</h3>
+  <ul style="line-height: 1.8;">
+    <li><strong>int</strong> – stores integers (e.g., 5, -10)</li>
+    <li><strong>float</strong> – stores decimal numbers (e.g., 3.14, -0.5)</li>
+    <li><strong>char</strong> – stores single characters (e.g., 'A', 'b')</li>
+  </ul>
+
+  <h3 style="color: #1976d2;">🛠️ Rules for Naming Variables:</h3>
+  <ul style="line-height: 1.8;">
+    <li>Must begin with a letter (A-Z or a-z) or an underscore (_) but not a digit</li>
+    <li>Can contain letters, digits, and underscores</li>
+    <li>No special characters or spaces allowed</li>
+    <li>Case-sensitive (e.g., <code>Age</code> and <code>age</code> are different)</li>
+  </ul>
+
+  <p style="margin-top: 20px;">
+    🔎 <strong>Note:</strong> Declaring the correct type of variable helps C manage memory efficiently and avoid errors during execution.
+  </p>
+</section>
+<section style="font-family: 'Segoe UI', sans-serif; background-color: white; border-radius: 15px; max-width: 900px; margin: 30px auto; color: #4a004e; ">
+  <h2 style="color: #0d47a1;">🔢 Data Types in C Language</h2>
+
+  <p>Data types in C determine the type and size of data associated with variables. The main categories are explained below:</p>
+
+  <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+      <tr style="background-color: #6e65e9; color: #140e88;">
+        <th style="border: 1px solid #2c1ac9; padding: 10px;">Category</th>
+        <th style="border: 1px solid #2c1ac9; padding: 10px;">Data Type</th>
+        <th style="border: 1px solid #2c1ac9; padding: 10px;">Description</th>
+        <th style="border: 1px solid #2c1ac9; padding: 10px;">Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="4" style="border: 1px solid #4640ec; padding: 10px;">Primary</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">int</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">Stores integers</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">int age = 25;</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #5140ec; padding: 10px;">float</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">Stores decimal values</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">float pi = 3.14;</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #5140ec; padding: 10px;">char</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">Stores a single character</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">char grade = 'A';</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #5140ec; padding: 10px;">double</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">Stores large decimal numbers</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">double balance = 12345.67;</td>
+      </tr>
+      <tr>
+        <td rowspan="3" style="border: 1px solid #5140ec; padding: 10px;">Derived</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">array</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">Collection of same data type</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">int marks[5];</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #5140ec; padding: 10px;">Stores address of variable</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">int *ptr;</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #5140ec; padding: 10px;">function</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">Reusable code blocks</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">void display();</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #5140ec; padding: 10px;">Enumeration</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">enum</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">Used to declare constants</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">enum day {Mon, Tue};</td>
+      </tr>
+      <tr>
+        <td rowspan="3" style="border: 1px solid #5140ec; padding: 10px;">User-defined</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">struct</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">Groups different types</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">struct Student {...}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #5140ec; padding: 10px;">union</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">Memory-sharing group</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">union Data {...}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #5140ec; padding: 10px;">typedef</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">Creates type aliases</td>
+        <td style="border: 1px solid #5140ec; padding: 10px;">typedef int age;</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top: 20px;">🎯 <strong>Note:</strong> Choosing the right data type helps optimize memory usage and improve code performance.</p>
+</section>
+<section style="font-family: 'Segoe UI', sans-serif; background-color: white; border-radius: 15px; max-width: 900px; margin: 30px auto; color: #4a004e; ">
+  <h2 style="color: #0d47a1;">🔄 Type Casting in C Language</h2>
+
+  <p><strong>Type Casting</strong> in C refers to converting a variable from one data type to another. It is used when you want to perform operations between different data types or store one type of value into a different type of variable.</p>
+
+  <h3 style="color: #1976d2;">📌 Types of Type Casting:</h3>
+
+  <ul style="line-height: 1.8;">
+    <li><strong>1. Implicit Type Casting (Automatic)</strong>
+      <ul>
+        <li>Performed by the compiler automatically.</li>
+        <li>Occurs when a smaller data type is converted into a larger data type.</li>
+        <li><strong>Example:</strong> int to float</li>
+      </ul>
+    </li>
+    <li><strong>2. Explicit Type Casting (Manual)</strong>
+      <ul>
+        <li>Performed by the programmer using the cast operator.</li>
+        <li>Syntax: <code>(type) variable</code></li>
+        <li><strong>Example:</strong> float to int</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3 style="color: #1976d2;">🧠 Example:</h3>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #4e40ec; padding: 10px 15px; border-radius: 10px;">
+    <pre style="margin: 0;"><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int a = 10;
+    float b = 5.5;
+
+    // Implicit type casting
+    float result = a + b;
+
+    // Explicit type casting
+    int c = (int)b;
+
+    printf("Result (float): %.2f\n", result);
+    printf("Converted value (int): %d\n", c);
+
+    return 0;
+}</code></pre>
+  </div>
+
+  <h3 style="color: #1976d2;">🔍 Output:</h3>
+  <pre style="background-color: #e7e4fc; padding: 10px; border-radius: 10px; color: #2a0e88;">
+Result (float): 15.50
+Converted value (int): 5
+  </pre>
+
+  <p>🎯 <strong>Note:</strong> Be careful while using type casting, as converting from a higher type to a lower type (like float to int) can lead to data loss.</p>
+</section>
+<section style="font-family: 'Segoe UI', sans-serif; background-color: white; border-radius: 15px; max-width: 900px; margin: 30px auto; color: #4a004e; ">
+  <h2 style="color: #0d47a1;">➕ Operators in C Language</h2>
+
+  <p>Operators in C are special symbols used to perform operations on variables and values. They are essential for performing arithmetic, logical, relational, and other types of computations.</p>
+
+  <h3 style="color: #1976d2;">📋 Types of Operators:</h3>
+
+  <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+      <tr style="background-color: #e4e4fc; color: #0e1488;">
+        <th style="border: 1px solid #4046ec; padding: 10px;">Operator Type</th>
+        <th style="border: 1px solid #4046ec; padding: 10px;">Operators</th>
+        <th style="border: 1px solid #4046ec; padding: 10px;">Description</th>
+        <th style="border: 1px solid #4046ec; padding: 10px;">Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Arithmetic</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">+, -, *, /, %</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Used for mathematical calculations</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">a + b</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Relational</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">==, !=, &gt;, &lt;, &gt;=, &lt;=</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Compare two values</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">a &gt; b</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Logical</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">&&, ||, !</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Combine multiple conditions</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">a &gt; b && b &gt; 0</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Assignment</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">=, +=, -=, *=, /=</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Assign values to variables</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">a += 5</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Increment/Decrement</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">++, --</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Increase or decrease value by 1</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">a++</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Bitwise</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">&, |, ^, ~, &lt;&lt;, &gt;&gt;</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Perform bit-level operations</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">a & b</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Conditional</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">?:</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Shorthand if-else statement</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">a &gt; b ? a : b</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Special</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">sizeof, &amp;, *</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">Used for memory-related operations</td>
+        <td style="border: 1px solid #4046ec; padding: 10px;">sizeof(a), &amp;a, *ptr</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top: 20px;">🎯 <strong>Tip:</strong> Understanding operator precedence and associativity is crucial for writing correct expressions in C.</p>
+</section>
+<section style="font-family: 'Segoe UI', sans-serif; background-color: white; border-radius: 15px; max-width: 950px; margin: 30px auto; color: #4a004e; padding: 30px;">
+  <h2 style="color: #0d47a1;">🔁 Control Statements in C</h2>
+
+  <p>Control statements in C language determine the flow of program execution. They help make decisions, repeat operations, and control how and when specific blocks of code are executed.</p>
+
+  <h3 style="color: #1976d2;">1. Conditional Control Statements</h3>
+  <ul>
+    <li><strong>if</strong>: Executes a block of code if a condition is true.</li>
+    <li><strong>if-else</strong>: Executes one block if the condition is true and another block if false.</li>
+    <li><strong>else if ladder</strong>: Checks multiple conditions one after another.</li>
+    <li><strong>switch</strong>: Selects one block of code to run from many options.</li>
+  </ul>
+  <pre style="background-color: #e6e4fc; padding: 10px; border-radius: 8px;"><code>int num = 10;
+if(num > 0) {
+    printf("Positive number");
+} else {
+    printf("Non-positive number");
+}</code></pre>
+
+  <h3 style="color: #1976d2;">2. Looping Statements</h3>
+  <ul>
+    <li><strong>for</strong>: Used when the number of iterations is known.</li>
+    <li><strong>while</strong>: Executes as long as the condition is true.</li>
+    <li><strong>do-while</strong>: Executes at least once before checking the condition.</li>
+  </ul>
+  <pre style="background-color: #e8e4fc; padding: 10px; border-radius: 8px;"><code>// for loop example
+for(int i = 0; i < 5; i++) {
+    printf("%d ", i);
+}</code></pre>
+
+  <h3 style="color: #1976d2;">3. Jump Statements</h3>
+  <ul>
+    <li><strong>break</strong>: Exits from the loop or switch statement.</li>
+    <li><strong>continue</strong>: Skips the current iteration and continues with the next.</li>
+    <li><strong>goto</strong>: Jumps to a labeled statement.</li>
+    <li><strong>return</strong>: Exits from the function and optionally returns a value.</li>
+  </ul>
+  <pre style="background-color: #e6e4fc; padding: 10px; border-radius: 8px;"><code>// break example
+for(int i = 0; i < 5; i++) {
+    if(i == 3) break;
+    printf("%d ", i);
+}</code></pre>
+
+  <p>✅ <strong>Conclusion:</strong> Control statements enhance the flexibility of C programs by directing the flow of execution based on various conditions.</p>
+</section>
+
+<section style="font-family: 'Segoe UI', sans-serif; background-color: white; border-radius: 15px; max-width: 900px; margin: 30px auto; color: #4a004e; ">
+  <h2 style="color: #0d47a1;">🔧 Functions in C Language</h2>
+
+  <p>A <strong>function</strong> in C is a block of code that performs a specific task. It helps in breaking down a large program into smaller, manageable pieces. Functions make code modular, reusable, and easier to understand and debug.</p>
+
+  <h3 style="color: #1976d2;">📌 Types of Functions:</h3>
+  <ul style="line-height: 1.8;">
+    <li><strong>Library Functions:</strong> Predefined functions provided by C (e.g., <code>printf()</code>, <code>scanf()</code>).</li>
+    <li><strong>User-defined Functions:</strong> Functions created by the user to perform specific tasks.</li>
+  </ul>
+
+  <h3 style="color: #1976d2;">🧱 Syntax of a User-defined Function:</h3>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #6540ec; padding: 10px 15px; border-radius: 10px;">
+    <pre style="margin: 0;"><code>return_type function_name(parameters) {
+    // code block
+    return value;
+}</code></pre>
+  </div>
+
+  <h3 style="color: #1976d2;">🧪 Example:</h3>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #5a40ec; padding: 10px 15px; border-radius: 10px;">
+    <pre style="margin: 0;"><code>#include &lt;stdio.h&gt;
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int result = add(5, 3);
+    printf("Sum: %d", result);
+    return 0;
+}</code></pre>
+  </div>
+
+  <h3 style="color: #1976d2;">⚙️ Components of a Function:</h3>
+  <ul style="line-height: 1.8;">
+    <li><strong>Function Declaration:</strong> Tells the compiler about the function name and parameters.</li>
+    <li><strong>Function Definition:</strong> Contains the actual code of the function.</li>
+    <li><strong>Function Call:</strong> Invokes the function to execute.</li>
+  </ul>
+
+  <h3 style="color: #1976d2;">💡 Advantages of Using Functions:</h3>
+  <ul style="line-height: 1.8;">
+    <li>Improves code readability and modularity</li>
+    <li>Reduces code repetition</li>
+    <li>Makes testing and debugging easier</li>
+    <li>Encourages code reuse</li>
+  </ul>
+
+  <p style="margin-top: 20px;">🎯 <strong>Tip:</strong> Keep your functions focused on a single task and use meaningful names for better clarity.</p>
+</section>
+<section style="font-family: 'Segoe UI', sans-serif; background-color: white; border-radius: 15px; max-width: 900px; margin: 30px auto; color: #4a004e;">
+  <h2 style="color: #0d47a1;">📚 Arrays in C Language</h2>
+
+  <p>An <strong>array</strong> in C is a collection of elements of the same data type stored in contiguous memory locations. It allows you to store multiple values in a single variable instead of declaring separate variables for each value.</p>
+
+  <h3 style="color: #1976d2;">🔢 Why Use Arrays?</h3>
+  <ul style="line-height: 1.8;">
+    <li>To store multiple values of the same type efficiently</li>
+    <li>To reduce code complexity and redundancy</li>
+    <li>To access and manipulate data using loops easily</li>
+  </ul>
+
+  <h3 style="color: #1976d2;">📌 Syntax:</h3>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #5440ec; padding: 10px 15px; border-radius: 10px;">
+    <pre style="margin: 0;"><code>data_type array_name[size];</code></pre>
+  </div>
+
+  <p>Example:</p>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #5440ec; padding: 10px 15px; border-radius: 10px;">
+    <pre style="margin: 0;"><code>int numbers[5] = {10, 20, 30, 40, 50};</code></pre>
+  </div>
+
+  <h3 style="color: #1976d2;">🔍 Accessing Array Elements</h3>
+  <p>Array elements are accessed using their index. Indexing starts from 0.</p>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #5a40ec; padding: 10px 15px; border-radius: 10px;">
+    <pre style="margin: 0;"><code>printf("%d", numbers[2]); // Outputs 30</code></pre>
+  </div>
+
+  <h3 style="color: #1976d2;">🛠 Types of Arrays</h3>
+  <ul style="line-height: 1.8;">
+    <li><strong>One-Dimensional Array:</strong> Stores elements in a single row</li>
+    <li><strong>Two-Dimensional Array:</strong> Stores elements in rows and columns (matrix form)</li>
+    <li><strong>Multi-Dimensional Array:</strong> Arrays with more than two dimensions</li>
+  </ul>
+
+  <h3 style="color: #1976d2;">🧪 Example: Traversing an Array</h3>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #6540ec; padding: 10px 15px; border-radius: 10px;">
+    <pre style="margin: 0;"><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int i;
+    int numbers[5] = {10, 20, 30, 40, 50};
+
+    for(i = 0; i &lt; 5; i++) {
+        printf("%d ", numbers[i]);
+    }
+    return 0;
+}</code></pre>
+  </div>
+
+  <h3 style="color: #1976d2;">✅ Advantages:</h3>
+  <ul style="line-height: 1.8;">
+    <li>Easy to manage large sets of data</li>
+    <li>Efficient memory access</li>
+    <li>Greatly simplifies looping structures</li>
+  </ul>
+
+  <p style="margin-top: 20px;">🎯 <strong>Tip:</strong> Always make sure to access array elements within the valid range (0 to size-1) to avoid memory errors.</p>
+</section>
+<section style="font-family: 'Segoe UI', sans-serif; background-color: white; border-radius: 15px; max-width: 900px; margin: 30px auto; color: #4a004e; ">
+  <h2 style="color: #0d47a1;">📍 Pointers in C Language</h2>
+
+  <p>A <strong>pointer</strong> in C is a variable that stores the memory address of another variable. Pointers are powerful tools that allow direct memory access, dynamic memory management, and efficient array and function handling.</p>
+
+  <h3 style="color: #1976d2;">📌 Syntax:</h3>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #6540ec; padding: 10px 15px; border-radius: 10px;">
+    <pre style="margin: 0;"><code>data_type *pointer_name;</code></pre>
+  </div>
+
+  <p><strong>Example:</strong></p>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #5a40ec; padding: 10px 15px; border-radius: 10px;">
+    <pre style="margin: 0;"><code>int a = 10;
+int *ptr = &a;</code></pre>
+  </div>
+
+  <h3 style="color: #1976d2;">🧠 Key Pointer Operators</h3>
+  <ul style="line-height: 1.8;">
+    <li><code>&</code> (Address-of operator): Returns the address of a variable.</li>
+    <li><code>*</code> (Dereference operator): Accesses the value stored at the pointer's address.</li>
+  </ul>
+
+  <h3 style="color: #1976d2;">🔍 Example: Using Pointers</h3>
+  <div style="background-color: #f8f8f8; border-left: 4px solid #6540ec; padding: 10px 15px; border-radius: 10px;">
+    <pre style="margin: 0;"><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int x = 42;
+    int *ptr = &x;
+
+    printf("Value of x: %d\n", x);
+    printf("Address of x: %p\n", &x);
+    printf("Pointer ptr holds address: %p\n", ptr);
+    printf("Value pointed to by ptr: %d\n", *ptr);
+
+    return 0;
+}</code></pre>
+  </div>
+
+  <h3 style="color: #1976d2;">📚 Uses of Pointers</h3>
+  <ul style="line-height: 1.8;">
+    <li>Efficient handling of arrays and strings</li>
+    <li>Dynamic memory allocation (using <code>malloc()</code>, <code>calloc()</code>)</li>
+    <li>Passing large structures to functions efficiently</li>
+    <li>Creating data structures like linked lists and trees</li>
+  </ul>
+
+  <h3 style="color: #1976d2;">✅ Advantages of Pointers</h3>
+  <ul style="line-height: 1.8;">
+    <li>Improves performance by direct memory access</li>
+    <li>Supports dynamic memory and data structure manipulation</li>
+    <li>Makes function arguments more flexible (pass by reference)</li>
+  </ul>
+
+  <p style="margin-top: 20px;">🎯 <strong>Tip:</strong> Pointers are powerful but must be used carefully. Accessing invalid memory can cause segmentation faults.</p>
+</section>
+
+</div>
+<footer>
+    <p>&copy; 2025 Learn Java | Beginner Friendly Course</p>
+  </footer>
+</body>
+</html>

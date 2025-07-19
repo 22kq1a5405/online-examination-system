@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login - TechyWorld</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #bbdefb);
+    }
+
+    nav {
+      background-color: #0d47a1;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-circle {
+      width: 42px;
+      height: 42px;
+      background-color: white;
+      color: #0d47a1;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    nav .brand {
+      display: flex;
+      align-items: center;
+    }
+
+    nav span {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav i {
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .login-container {
+      max-width: 400px;
+      margin: 80px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #0d47a1;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #0d47a1;
+    }
+
+    .google-btn {
+      display: inline-block;
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background-color: #db4437;
+      color: white;
+      text-align: center;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .google-btn:hover {
+      background-color: #c23321;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="brand">
+      <div class="logo-circle">TW</div>
+      <span>TechyWorld</span>
+    </div>
+    <i class="fas fa-home" onclick="window.location.href='/index.html'"></i>
+  </nav>
+
+  <!-- Login Form -->
+  <div class="login-container">
+    <h2>Admin Login</h2>
+    <div class="error" id="errorMsg"></div>
+
+    <form id="adminLoginForm">
+      <label for="adminUsername">Username</label>
+      <input type="text" id="adminUsername" placeholder="Enter Admin Username" required>
+
+      <label for="adminPassword">Password</label>
+      <input type="password" id="adminPassword" placeholder="Enter Password" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <!-- Google Login Button -->
+    <a href="/oauth2/authorization/google" class="google-btn">Login with Google</a>
+
+  </div>
+
+  <script>
+    const form = document.getElementById("adminLoginForm");
+    const errorMsg = document.getElementById("errorMsg");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const username = document.getElementById("adminUsername").value;
+      const password = document.getElementById("adminPassword").value;
+
+      fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = "admin-dashboard.html";
+        } else {
+          return response.text().then(msg => {
+            errorMsg.textContent = msg || "Invalid admin credentials!";
+          });
+        }
+      })
+      .catch(() => {
+        errorMsg.textContent = "Server error. Please try again.";
+      });
+    });
+  </script>
+
+</body>
+</html>

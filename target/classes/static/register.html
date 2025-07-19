@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Register - TechyWorld</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* --- CSS Variables for Blue Theming --- */
+    :root {
+        --primary-blue: #003366;       /* Dark Navy Blue */
+        --accent-blue: #007bff;        /* Standard Bright Blue */
+        --light-blue: #e0f2ff;         /* Very Light Blue */
+        --gradient-start: #cceeff;     /* Lighter Blue for gradients */
+        --gradient-end: #e6f9ff;       /* Even lighter Blue for gradients */
+        --hover-blue: #0056b3;         /* Darker blue on hover */
+        --text-dark: #333333;          /* Dark text for readability */
+        --text-light: #ffffff;         /* Light text for dark backgrounds */
+        --border-color: #cccccc;
+        --shadow-light: rgba(0,0,0,0.1);
+        --shadow-medium: rgba(0,0,0,0.2);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Source Sans 3', sans-serif; /* Modern sans-serif font */
+      color: var(--text-dark);
+      background: radial-gradient(circle at top left, var(--gradient-start), var(--gradient-end)); /* Soft radial gradient */
+      min-height: 100vh; /* Ensure it takes full viewport height */
+      display: flex; /* Use flexbox for vertical centering */
+      flex-direction: column;
+    }
+
+    /* --- Navigation Bar --- */
+    nav {
+      background-color: var(--primary-blue);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 25px;
+      box-shadow: 0 4px 12px var(--shadow-medium);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-circle {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: var(--text-light);
+      color: var(--primary-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 2px 8px var(--shadow-light);
+    }
+    .logo-text {
+      font-size: 1.4rem;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      color: var(--text-light);
+      text-decoration: none;
+    }
+
+    /* --- Form Container --- */
+    .container {
+      background-color: var(--text-light); /* White background */
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 12px 30px var(--shadow-medium);
+      width: 100%;
+      max-width: 400px;
+      /* --- FIX: Added specific margin-top --- */
+      margin-top: 50px; /* Ensures space from the navbar */
+      margin-left: auto; /* Retains horizontal centering */
+      margin-right: auto; /* Retains horizontal centering */
+      margin-bottom: 50px; /* Ensures space from the bottom/footer if any */
+      text-align: center;
+      flex-shrink: 0;
+    }
+    h2 {
+      color: var(--accent-blue);
+      margin-bottom: 20px;
+      font-size: 1.8em;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1em;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      background-color: #f8f8f8;
+    }
+    input:focus, select:focus {
+      border-color: var(--accent-blue);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    }
+
+    /* --- Button Styling --- */
+    button {
+      background-color: var(--accent-blue);
+      color: var(--text-light);
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      margin-top: 15px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px var(--shadow-light);
+    }
+    button:hover {
+      background-color: var(--hover-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px var(--shadow-medium);
+    }
+
+    /* --- Message & Link Styling --- */
+    .message {
+      margin-top: 15px;
+      font-weight: 600;
+      min-height: 24px;
+      padding: 5px;
+    }
+    .message.error {
+        color: #dc3545;
+    }
+    .message.success {
+        color: #28a745;
+    }
+
+    .login-ref {
+      margin-top: 15px;
+      font-size: 0.95em;
+      color: var(--text-dark);
+    }
+    .login-ref a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .login-ref a:hover {
+      text-decoration: underline;
+      color: var(--hover-blue);
+    }
+
+    /* --- Responsive Adjustments --- */
+    @media (max-width: 600px) {
+      nav {
+        padding: 10px 15px;
+      }
+      .logo-circle {
+        height: 36px;
+        width: 36px;
+        font-size: 1rem;
+      }
+      .logo-text {
+        font-size: 1.3rem;
+      }
+      .container {
+        padding: 25px;
+        margin-top: 30px; /* Adjust top margin for smaller screens */
+        margin-bottom: 30px; /* Adjust bottom margin for smaller screens */
+        max-width: 95%;
+      }
+      h2 {
+        font-size: 1.6em;
+      }
+      input, select, button {
+        padding: 10px;
+        font-size: 0.9em;
+      }
+      button {
+        margin-top: 15px;
+      }
+      .message {
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .container {
+        padding: 20px;
+        margin-top: 20px; /* Further adjust top margin */
+        margin-bottom: 20px; /* Further adjust bottom margin */
+      }
+      h2 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+      }
+      input, select {
+        margin-top: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <div class="logo-circle">TW</div>
+      <div class="logo-text">TechyWorld</div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2>Register as TechyWorld User</h2>
+
+    <form id="registerForm">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+      <select id="language" required>
+        <option value="">Select Interested Programming Language</option>
+        <option value="Java">Java</option>
+        <option value="Python">Python</option>
+        <option value="C++">C++</option>
+        <option value="C">C</option>
+      </select>
+      <select id="year" required>
+        <option value="">Year of Study</option>
+        <option value="1">1st Year</option>
+        <option value="2">2nd Year</option>
+        <option value="3">3rd Year</option>
+        <option value="4">4th Year</option>
+      </select>
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="message" id="msg"></div>
+
+    <div class="login-ref">
+      Already have an account? <a href="login.html">Login here</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+      const language = document.getElementById("language").value;
+      const year = document.getElementById("year").value;
+      const msg = document.getElementById("msg");
+
+      // Clear previous messages and classes
+      msg.textContent = "";
+      msg.classList.remove("error", "success");
+
+      if (password !== confirmPassword) {
+        msg.classList.add("error");
+        msg.textContent = "Passwords do not match!";
+        return;
+      }
+
+      fetch("http://localhost:8080/api/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email, username, password, language, year })
+      })
+      .then(response => response.text())
+      .then(data => {
+        if (data === "Username already exists!") {
+          msg.classList.add("error");
+          msg.textContent = "Username already exists!";
+        } else if (data === "User registered successfully!") {
+          msg.classList.add("success");
+          msg.textContent = "Registered successfully! Redirecting...";
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 1500);
+        } else {
+          msg.classList.add("error");
+          msg.textContent = "Unexpected error: " + data;
+        }
+      })
+      .catch(error => {
+        msg.classList.add("error");
+        msg.textContent = "Something went wrong! Please try again later.";
+        console.error("Error:", error);
+      });
+    });
+  </script>
+
+</body>
+</html>

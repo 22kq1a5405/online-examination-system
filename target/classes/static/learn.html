@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Learn Languages - TechyWorld</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* --- CSS Variables for Blue Theming (Consistent across pages) --- */
+    :root {
+        --primary-blue: #003366;       /* Dark Navy Blue */
+        --accent-blue: #007bff;        /* Standard Bright Blue */
+        --light-blue: #e0f2ff;         /* Very Light Blue */
+        --gradient-start: #cceeff;     /* Lighter Blue for gradients */
+        --gradient-end: #e6f9ff;       /* Even lighter Blue for gradients */
+        --hover-blue: #0056b3;         /* Darker blue on hover */
+        --text-dark: #333333;          /* Dark text for readability */
+        --text-light: #ffffff;         /* Light text for dark backgrounds */
+        --border-color: #cccccc;
+        --shadow-light: rgba(0,0,0,0.1);
+        --shadow-medium: rgba(0,0,0,0.2);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Source Sans 3', sans-serif; /* Consistent font */
+      color: var(--text-dark);
+      background: radial-gradient(circle at top left, var(--gradient-start), var(--gradient-end)); /* Consistent background */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- Navigation Bar (Consistent across internal pages) --- */
+    nav {
+      background-color: var(--primary-blue);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 25px; /* Small size */
+      box-shadow: 0 4px 12px var(--shadow-medium);
+      width: 100%;
+      flex-shrink: 0;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-circle {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: var(--text-light);
+      color: var(--primary-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 2px 8px var(--shadow-light);
+    }
+    .logo-text {
+      font-size: 1.4rem;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      color: var(--text-light);
+      text-decoration: none;
+    }
+
+    /* --- Main Content Container --- */
+    .button-container {
+      flex-grow: 1; /* Allows it to take up remaining vertical space */
+      display: flex;
+      justify-content: center;
+      align-items: center; /* Centers cards vertically */
+      gap: 30px; /* Gap between cards */
+      padding: 60px 20px;
+      flex-wrap: wrap; /* Allows cards to wrap on smaller screens */
+    }
+
+    /* --- NEW ALTERNATIVE: Language Card Design (Solid Blue) --- */
+    .language-card {
+      background-color: var(--primary-blue); /* Solid dark blue background */
+      color: var(--text-light); /* White text */
+      text-align: center;
+      width: 220px; /* Fixed width for cards */
+      min-height: 180px; /* Minimum height for cards */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      border-radius: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease; /* Smooth transitions */
+      box-shadow: 0 8px 20px var(--shadow-medium); /* Stronger initial shadow */
+      padding: 20px;
+    }
+
+    .language-card:hover {
+      background-color: var(--hover-blue); /* Darker blue on hover */
+      color: var(--text-light); /* Keep text white */
+      transform: translateY(-10px); /* Lift effect */
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3); /* Even stronger shadow on hover */
+      border: none; /* No border needed for this design */
+    }
+
+    /* --- Responsive Adjustments --- */
+    @media (max-width: 768px) {
+      nav {
+        padding: 10px 15px;
+      }
+      .logo-circle {
+        height: 36px;
+        width: 36px;
+        font-size: 1rem;
+      }
+      .logo-text {
+        font-size: 1.3rem;
+      }
+      .button-container {
+        padding: 40px 10px;
+        gap: 20px;
+      }
+      .language-card {
+        width: 160px;
+        min-height: 140px;
+        font-size: 20px;
+        padding: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .button-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+      .language-card {
+        width: 80%;
+        max-width: 250px;
+        min-height: 120px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo-container">
+      <div class="logo-circle">TW</div>
+      <div class="logo-text">TechyWorld</div>
+    </div>
+  </nav>
+
+  <div class="button-container">
+    <a href="learnC.html" class="language-card"><span>C Language</span></a>
+    <a href="learnpython.html" class="language-card"><span>Python</span></a>
+    <a href="learnjava.html" class="language-card"><span>Java</span></a>
+  </div>
+
+</body>
+</html>

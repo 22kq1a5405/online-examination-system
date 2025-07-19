@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard - TechyWorld</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #d9efff, #f1f9ff);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 260px;
+      background-color: #003366;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 20px;
+      margin-bottom: 30px;
+    }
+
+    .logo-circle {
+      height: 42px;
+      width: 42px;
+      border-radius: 50%;
+      background-color: white;
+      color: #003366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      font-family: 'Georgia', serif;
+    }
+
+    .logo-text {
+      font-size: 1.6rem;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+    }
+
+    .sidebar-user {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 20px;
+      margin-bottom: 30px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .sidebar-user i {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0 20px;
+      flex-grow: 1;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.05rem;
+      padding: 12px 20px;
+      border-radius: 6px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu a:hover {
+      background-color: #0056b3;
+      transform: translateX(5px);
+    }
+
+    .logout-btn {
+      background-color: #ec407a;
+      border: none;
+      padding: 12px;
+      margin: 20px;
+      border-radius: 6px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .logout-btn:hover {
+      background-color: #c62857;
+    }
+
+    /* Styles for the main content area */
+    .content {
+      margin-left: 260px;
+      padding: 30px;
+      flex: 1;
+      display: flex; /* Added for layout */
+      flex-direction: column; /* Default to column, will change for larger screens */
+      align-items: center; /* Center items when stacked */
+      gap: 30px; /* Space between text and image */
+    }
+
+    .content h2 {
+      color: #003366;
+      font-size: 2rem;
+      margin-bottom: 10px; /* Adjusted margin */
+      text-align: center;
+    }
+
+    .content p {
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* Container for text and image */
+    .dashboard-main-section {
+        display: flex;
+        flex-direction: column; /* Stack by default on smaller screens */
+        align-items: center;
+        gap: 30px;
+        width: 100%;
+        max-width: 900px; /* Limit the width of this section */
+        background-color: #ffffff; /* White background for this section */
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .dashboard-text {
+        flex: 1; /* Allow text to grow */
+        text-align: center; /* Center text on small screens */
+    }
+
+    .dashboard-image {
+        max-width: 100%; /* Make image responsive */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 8px; /* Slightly rounded corners for the image */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+        transition: transform 0.3s ease;
+    }
+
+    .dashboard-image:hover {
+        transform: translateY(-5px); /* Gentle lift on hover */
+    }
+
+
+    @media screen and (min-width: 769px) { /* Adjust for larger screens */
+        .content {
+            padding: 40px; /* Slightly more padding for larger screens */
+            align-items: flex-start; /* Align content to start when elements are side-by-side */
+        }
+        .dashboard-main-section {
+            flex-direction: row; /* Arrange text and image side-by-side */
+            text-align: left; /* Align text to left when side-by-side */
+            justify-content: space-between; /* Space out text and image */
+            align-items: center; /* Vertically align items in the middle */
+        }
+        .dashboard-text {
+            padding-right: 40px; /* Add space between text and image */
+            text-align: left;
+        }
+        .content h2,
+        .content p {
+            text-align: left;
+        }
+    }
+
+
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 220px;
+      }
+
+      .content {
+        margin-left: 220px;
+      }
+    }
+
+    @media screen and (max-width: 576px) {
+      .sidebar {
+        position: fixed;
+        transform: translateX(-100%);
+        z-index: 999;
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
+      }
+
+      .content {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .menu-toggle {
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        font-size: 1.6rem;
+        background: #003366;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        z-index: 1000;
+        cursor: pointer;
+      }
+
+      .dashboard-main-section {
+          padding: 25px; /* Adjust padding for smaller screens */
+      }
+      .dashboard-text {
+          padding-right: 0; /* Remove padding when stacked */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-circle">TW</div>
+      <div class="logo-text">TechyWorld</div>
+    </div>
+
+    <div class="sidebar-user">
+      <i class="fas fa-user-circle"></i>
+      <span id="userName">User</span>
+    </div>
+
+    <div class="menu">
+      <a href="instructions.html"><i class="fas fa-pen"></i> Start Exam</a>
+      <a href="results.html"><i class="fas fa-chart-line"></i> View Results</a>
+      <a href="progress.html"><i class="fas fa-bullseye"></i> Progress Tracker</a>
+      <a href="learninghub.html"><i class="fas fa-lightbulb"></i> Learning Hub</a>
+      <a href="feedback.html"><i class="fas fa-comments"></i> Feedback & Support</a>
+      <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+    </div>
+
+    <button class="logout-btn" onclick="logoutUser()">Logout</button>
+  </div>
+
+  <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+
+  <div class="content">
+    <div class="dashboard-main-section">
+        <div class="dashboard-text">
+            <h2>Welcome to TechyWorld Dashboard</h2>
+            <p>Select an option from the sidebar to get started! Here, you can access your exams, track progress, explore learning resources, and more.</p>
+        </div>
+        <div>
+            <img src="images/dashboard_img.jpg" alt="Dashboard Illustration" class="dashboard-image">
+        </div>
+    </div>
+  </div>
+
+  <script>
+    // Show username from localStorage
+    const username = localStorage.getItem("username");
+    if (username) {
+      document.getElementById("userName").textContent = username;
+    }
+
+    // Logout clears localStorage and redirects to home page
+    function logoutUser() {
+      localStorage.removeItem("username");
+      window.location.href = "index.html"; // or login.html depending on your setup
+    }
+
+    // Sidebar toggle for small screens
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+  </script>
+
+</body>
+</html>

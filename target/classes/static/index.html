@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Welcome to TechyWorld</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Variables for Easy Theming (Original Blue Palette) --- */
+        :root {
+            --primary-blue: #003366; /* Your original dark blue */
+            --secondary-blue: #00509e; /* Slightly lighter for accents/hover */
+            --light-blue-gradient-start: #cceeff; /* Original light blue gradient start */
+            --light-blue-gradient-end: #e6f9ff;   /* Original light blue gradient end */
+            --accent-blue: #007bff; /* Bright blue for primary actions */
+            --hover-blue: #0056b3;
+            --text-dark: #333333;
+            --text-light: #F8F8F8; /* Light text for dark backgrounds */
+            --white: #ffffff;
+            --shadow-subtle: rgba(0,0,0,0.1);
+            --shadow-medium: rgba(0,0,0,0.2);
+        }
+
+        /* --- Global Resets & Base Styles --- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Source Sans 3', sans-serif; /* Clean, modern sans-serif for body text */
+            color: var(--text-dark);
+            /* Classic Background Image with Blue Overlay */
+            /* IMPORTANT: Replace the URL below with your desired classic background image! */
+            background: linear-gradient(to bottom right, rgba(204, 238, 255, 0.7), rgba(230, 249, 255, 0.7)), /* Semi-transparent overlay of your original light blue gradient */
+                        url('https://images.unsplash.com/photo-1456926693132-15a6b0c26884?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+            background-size: cover;
+            background-blend-mode: overlay; /* Blends the gradient with the image */
+        }
+
+        /* --- Navigation Bar Styling --- */
+        nav {
+            background-color: var(--primary-blue);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 50px; /* DECREASED PADDING HERE */
+            box-shadow: 0 5px 15px var(--shadow-medium);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--white); /* White logo circle */
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 22px;
+            margin-right: 15px;
+            box-shadow: 0 2px 8px var(--shadow-medium);
+            transition: transform 0.3s ease;
+        }
+        .logo-circle:hover {
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 2.2rem;
+            font-family: 'Lora', serif; /* Elegant serif font for logo */
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            font-weight: 600;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-blue); /* Original accent blue underline */
+            transition: width 0.3s ease-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--secondary-blue);
+            box-shadow: 0 0 18px rgba(255,255,255,0.2);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            background-color: var(--accent-blue);
+            color: var(--white);
+            padding: 12px 22px;
+            font-weight: 600;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: var(--hover-blue);
+            box-shadow: 0 0 18px var(--accent-blue);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background-color: var(--white); /* White background for dropdown */
+            min-width: 190px;
+            box-shadow: 0 10px 20px var(--shadow-medium);
+            border-radius: 6px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            overflow: hidden;
+        }
+
+        .dropdown-content.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-content a {
+            color: var(--primary-blue);
+            padding: 14px 20px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #e0e0e0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 400;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--light-blue-gradient-start); /* Hover uses the lighter blue */
+            color: var(--secondary-blue);
+        }
+
+        /* --- Hero Section Styling --- */
+        .hero {
+            padding: 80px 40px; /* Reduced vertical padding slightly */
+            text-align: left; /* Align text to the left */
+            animation: fadeIn 2s ease-in-out;
+            max-width: 1200px; /* Wider hero section */
+            margin: 60px auto;
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white for content readability */
+            border-radius: 12px;
+            box-shadow: 0 10px 25px var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Vertically center content */
+            justify-content: space-between; /* Space out text and image */
+        }
+
+        .hero-text {
+            flex: 1; /* Take up remaining space */
+            padding-right: 40px; /* Add spacing between text and image */
+        }
+
+        .hero h1 {
+            font-family: 'Lora', serif;
+            font-size: 4rem; /* Slightly smaller heading */
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.15);
+            letter-spacing: 1.5px;
+        }
+
+        .hero p {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 1.2rem; /* Slightly smaller paragraph */
+            color: var(--text-dark);
+            line-height: 1.6;
+            max-width: 550px; /* Limit text width */
+        }
+
+        .actions {
+            margin-top: 40px;
+        }
+
+        .actions a {
+            display: inline-block;
+            margin: 10px 15px; /* Smaller button spacing */
+            padding: 14px 28px; /* Smaller buttons */
+            background-color: var(--accent-blue);
+            color: var(--white);
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1.1rem; /* Smaller button text */
+            box-shadow: 0 5px 15px var(--shadow-medium);
+        }
+
+        .actions a:hover {
+            background-color: var(--hover-blue);
+            transform: translateY(-3px); /* Smaller hover lift */
+            box-shadow: 0 8px 20px rgba(0,123,255,0.4); /* Smaller hover shadow */
+        }
+
+        /* Style for the image in the hero section */
+        .hero .hero-image-container {
+            flex: 1; /* Take up remaining space */
+            text-align: right; /* Align image to the right */
+        }
+
+        .hero .hero-image {
+            max-width: 100%; /* Make the image responsive */
+            max-height: 350px; /* Limit the maximum height of the image */
+            height: auto;
+            border-radius: 8px; /* Optional: Add rounded corners to the image */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Add a subtle shadow */
+        }
+
+        /* --- About Section Styling (Different Way) --- */
+        .about-section {
+            padding: 80px 40px;
+            text-align: center;
+            max-width: 1100px;
+            margin: 80px auto;
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white for content readability */
+            border-radius: 12px;
+            box-shadow: 0 10px 25px var(--shadow-medium);
+        }
+
+        .about-section h2 {
+            font-family: 'Lora', serif;
+            font-size: 3.5rem;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 50px;
+            color: var(--primary-blue);
+        }
+
+        .about-section h2::after {
+            content: '';
+            display: block;
+            width: 80%;
+            height: 5px;
+            background: var(--accent-blue); /* Original accent blue underline */
+            margin: 15px auto 0;
+            animation: underlineSlide 1.2s ease-out;
+            border-radius: 3px;
+        }
+
+        .about-content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .about-card {
+            background-color: var(--white); /* White background for each card */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px var(--shadow-subtle);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .about-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+
+        .about-card h3 {
+            font-family: 'Lora', serif;
+            font-size: 1.8rem;
+            color: var(--primary-blue); /* Card titles use primary blue */
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .about-card h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-blue); /* Accent blue underline for card titles */
+        }
+
+        .about-card p, .about-card ul {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin-bottom: 0;
+        }
+
+        .about-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        .about-card ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 8px;
+        }
+
+        .about-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        /* --- Footer Styling --- */
+        footer {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 100px;
+            box-shadow: 0 -5px 15px var(--shadow-medium);
+        }
+
+        .social-media {
+            margin-bottom: 20px;
+        }
+
+        .social-media a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+            font-size: 1.15rem;
+        }
+
+        .social-media a:hover {
+            color: var(--accent-blue); /* Original accent blue hover for social links */
+            transform: translateY(-3px);
+        }
+
+        .contact-info {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info span {
+            display: inline-block;
+            margin: 5px 20px;
+            line-height: 1.5;
+        }
+
+        /* --- Keyframe Animations --- */
+        @keyframes underlineSlide {
+            0% { width: 0%; opacity: 0; }
+            50% { opacity: 1; }
+            100% { width: 80%; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.2rem; /* Further reduced heading size on smaller screens */
+            }
+            .hero p {
+                font-size: 1.1rem; /* Further reduced paragraph size */
+            }
+
+            .about-section h2 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 15px 20px;
+            }
+            .logo-container {
+                margin-bottom: 15px;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+            .nav-links a, .dropbtn {
+                width: 90%;
+                text-align: center;
+            }
+            .dropdown {
+                width: 90%;
+            }
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                border-top: 1px solid #eee;
+            }
+            .hero {
+                flex-direction: column; /* Stack text and image on smaller screens */
+                text-align: center; /* Center text on smaller screens */
+            }
+            .hero-text {
+                padding-right: 0; /* Remove padding on smaller screens */
+                margin-bottom: 20px; /* Add space between text and image */
+            }
+            .hero-image-container {
+                text-align: center; /* Center image on smaller screens */
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .actions a {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+            .about-section h2 {
+                font-size: 2.5rem;
+            }
+            .about-content-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-card {
+                padding: 25px;
+            }
+            .contact-info span {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.8rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem; /* Further reduced heading size */
+            }
+            .about-section h2 {
+                font-size: 2rem;
+                margin-bottom: 30px;
+            }
+            .about-card h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <div class="logo-circle">TW</div>
+            <a href="index.html" class="logo-text">TechyWorld</a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact</a>
+            <div class="dropdown">
+                <button class="dropbtn" id="loginBtn" onclick="toggleDropdown()">Login ⌄</button>
+                <div class="dropdown-content" id="dropdownContent">
+                    <a href="register.html">User Login</a>
+                    <a href="admin-login.html">Admin Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Welcome to TechyWorld</h1>
+            <p>The platform that helps you improve your programming skills through online exams and learning.</p>
+            <div class="actions">
+                <a href="register.html">Get Started</a>
+            </div>
+        </div>
+        <div class="hero-image-container">
+            <img src="images/techyworld_bg.jpg" alt="Girl and Boy Coding" class="hero-image">
+        </div>
+    </div>
+
+    <section class="about-section" id="about">
+        <h2>About Us</h2>
+        <div class="about-content-grid">
+            <div class="about-card">
+                <h3>Our Mission</h3>
+                <p>TechyWorld is an advanced e-learning portal built to help learners prepare for competitive programming exams.</p>
+                <p>Our core mission is to provide high-quality, interactive, and practice-based exam content in a user-friendly environment.</p>
+            </div>
+            <div class="about-card">
+                <h3>Empowering Learners</h3>
+                <p>We empower students by offering self-paced tests and robust tracking mechanisms to monitor their growth and identify areas for improvement.</p>
+                <p>Join thousands of learners who are actively improving their skills with us.</p>
+            </div>
+            <div class="about-card">
+                <h3>Platform Features</h3>
+                <ul>
+                    <li>Extensive coding questions and quizzes</li>
+                    <li>Specialized language-specific tests</li>
+                    <li>Detailed performance analytics and insights</li>
+                    <li>Interactive learning modules</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="social-media">
+            <a href="#">🌐 Facebook</a>
+            <a href="#">🐦 Twitter</a>
+            <a href="#">🔗 LinkedIn</a>
+        </div>
+        <div class="contact-info">
+            <span>📧 contact@techyworld.com</span>
+            <span>📞 +91-9876543210</span>
+        </div>
+        <div>
+            &copy; 2025 TechyWorld. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        function toggleDropdown() {
+            document.getElementById("dropdownContent").classList.toggle("show");
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        };
+    </script>
+</body>
+</html>

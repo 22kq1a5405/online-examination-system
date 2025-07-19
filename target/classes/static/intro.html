@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to TechyWorld!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Variables for Blue Theming (Consistent with your project) */
+        :root {
+            --primary-blue: #003366;       /* Dark Navy Blue */
+            --accent-blue: #007bff;        /* Standard Bright Blue */
+            --light-blue: #e0f2ff;         /* Very Light Blue */
+            --gradient-start: #cceeff;     /* Lighter Blue for gradients */
+            --gradient-end: #e6f9ff;       /* Even lighter Blue for gradients */
+            --hover-blue: #0056b3;         /* Darker blue on hover */
+            --text-dark: #333333;          /* Dark text for readability */
+            --text-light: #ffffff;         /* Light text for dark backgrounds */
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-medium: rgba(0,0,0,0.2);
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars during animation */
+            font-family: 'Source Sans 3', sans-serif;
+            background: radial-gradient(circle at top left, var(--gradient-start), var(--gradient-end));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .intro-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 1; /* Start visible */
+            transition: opacity 0.5s ease-out; /* For fading out the whole intro */
+        }
+
+        .logo-animation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px; /* Add some padding around the logo elements */
+        }
+
+        .logo-circle {
+            height: 120px; /* Larger for intro */
+            width: 120px;
+            border-radius: 50%;
+            background-color: var(--text-light);
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 4rem; /* Larger font for TW */
+            font-family: 'Georgia', serif;
+            box-shadow: 0 5px 20px var(--shadow-medium);
+
+            transform: scale(0.8); /* Start slightly scaled down */
+            opacity: 0; /* Start invisible */
+            animation: fadeInGrow 0.8s ease-out forwards; /* Animation for circle */
+        }
+
+        .logo-text {
+            font-size: 2.5rem; /* Larger font for text */
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-top: 20px;
+            
+            opacity: 0; /* Start invisible */
+            transform: translateY(20px); /* Start slightly below */
+            animation: fadeInSlideUp 0.8s ease-out 0.5s forwards; /* Animation for text, delayed */
+        }
+
+        .logo-underline {
+            width: 0; /* Start with no width */
+            height: 4px; /* Thickness of the line */
+            background-color: var(--accent-blue); /* Color of the line */
+            margin-top: 15px; /* Space below text */
+            border-radius: 2px; /* Slightly rounded ends */
+
+            animation: drawLine 0.6s ease-out 1.2s forwards; /* Animation for line, more delayed */
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInGrow {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes drawLine {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 250px; /* Adjust this to the desired final width of the line */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="intro-container" id="introContainer">
+        <div class="logo-animation">
+            <div class="logo-circle">TW</div>
+            <div class="logo-text">TechyWorld</div>
+            <div class="logo-underline"></div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const introContainer = document.getElementById('introContainer');
+            // Total visual animation duration is approximately 1.2s (underline finishes)
+            // Let's set a total intro display time before fade-out of 2.5 seconds.
+            const animationDisplayDuration = 2500; // 2.5 seconds
+
+            setTimeout(() => {
+                // Start fading out the entire intro container
+                introContainer.style.opacity = '0';
+
+                // After the fade-out transition, redirect to the index page
+                setTimeout(() => {
+                    window.location.href = 'index.html'; // Ensure this is the correct path to your main page
+                }, 500); // This should match the CSS transition duration for intro-container opacity
+            }, animationDisplayDuration);
+        };
+    </script>
+
+</body>
+</html>
