@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manage Feedback - TechyWorld Admin</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f6fc;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: #003366;
+      color: white;
+      padding: 12px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      color: #003366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      margin-right: 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    nav button {
+      background-color: #007bff;
+      border: none;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    nav button:hover {
+      background-color: #0056b3;
+    }
+
+    h2 {
+      text-align: center;
+      color: #003366;
+      margin: 20px;
+    }
+
+    table {
+      width: 95%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #003366;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8fbff;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo-container">
+      <div class="logo-circle">TW</div>
+      <h3>TechyWorld Admin</h3>
+    </div>
+    <button onclick="window.location.href='admin-dashboard.html'">Return to Dashboard</button>
+  </nav>
+
+  <h2>User Feedback</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Type</th>
+        <th>Message</th>
+        <th>Submitted At</th>
+      </tr>
+    </thead>
+    <tbody id="feedbackTableBody">
+      <!-- Feedback will be loaded here -->
+    </tbody>
+  </table>
+
+  <script>
+    async function fetchFeedback() {
+      const res = await fetch("http://localhost:8080/api/feedback/all");
+      const feedbacks = await res.json();
+
+      const tbody = document.getElementById("feedbackTableBody");
+      tbody.innerHTML = "";
+
+      feedbacks.forEach(f => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${f.id}</td>
+          <td>${f.name}</td>
+          <td>${f.email}</td>
+          <td>${f.type}</td>
+          <td>${f.message}</td>
+          <td>${f.submittedAt.replace("T", " ").slice(0, 16)}</td>
+        `;
+
+        tbody.appendChild(row);
+      });
+    }
+
+    window.onload = fetchFeedback;
+  </script>
+
+</body>
+</html>

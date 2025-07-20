@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - TechyWorld</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+        --primary-blue: #003366;
+        --accent-blue: #007bff;
+        --light-blue: #e0f2ff;
+        --gradient-start: #cceeff;
+        --gradient-end: #e6f9ff;
+        --hover-blue: #0056b3;
+        --text-dark: #333333;
+        --text-light: #ffffff;
+        --border-color: #cccccc;
+        --shadow-light: rgba(0,0,0,0.1);
+        --shadow-medium: rgba(0,0,0,0.2);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Source Sans 3', sans-serif;
+      color: var(--text-dark);
+      background: radial-gradient(circle at top left, var(--gradient-start), var(--gradient-end));
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background-color: var(--primary-blue);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 25px;
+      box-shadow: 0 4px 12px var(--shadow-medium);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-circle {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      background-color: var(--text-light);
+      color: var(--primary-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      font-family: 'Georgia', serif;
+      box-shadow: 0 2px 8px var(--shadow-light);
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      color: var(--text-light);
+      text-decoration: none;
+    }
+
+    .login-container {
+      background: var(--text-light);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 12px 30px var(--shadow-medium);
+      width: 100%;
+      max-width: 350px;
+      text-align: center;
+      margin: auto;
+      flex-shrink: 0;
+    }
+
+    h2 {
+      color: var(--accent-blue);
+      margin-bottom: 20px;
+      font-size: 1.8em;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-size: 1em;
+      background-color: #f8f8f8;
+    }
+
+    input[type="text"]:focus, input[type="password"]:focus {
+      border-color: var(--accent-blue);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: var(--accent-blue);
+      color: var(--text-light);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-weight: 700;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 10px var(--shadow-light);
+    }
+
+    button:hover {
+      background-color: var(--hover-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px var(--shadow-medium);
+    }
+
+    .message {
+      margin-top: 15px;
+      font-weight: 600;
+      min-height: 24px;
+      padding: 5px;
+    }
+
+    .message.error { color: #dc3545; }
+    .message.success { color: #28a745; }
+
+    .login-link {
+      margin-top: 15px;
+      font-size: 0.95em;
+      color: var(--text-dark);
+    }
+
+    .login-link a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+      color: var(--hover-blue);
+    }
+
+    .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: #ffffff;
+      color: #444;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 10px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 8px var(--shadow-light);
+    }
+
+    .google-btn:hover {
+      background-color: #f1f1f1;
+      box-shadow: 0 4px 12px var(--shadow-medium);
+    }
+
+    .google-icon {
+      width: 22px;
+      height: 22px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">
+      <div class="logo-circle">TW</div>
+      <div class="logo-text">TechyWorld</div>
+    </div>
+  </nav>
+
+  <div class="login-container">
+    <h2>User Login</h2>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Enter Username" required />
+      <input type="password" id="password" placeholder="Enter Password" required />
+      <button type="submit">Login</button>
+    </form>
+
+    <p style="margin: 15px 0; font-weight: 600;">OR</p>
+
+    <a href="http://localhost:8080/oauth2/authorization/google" class="google-btn">
+      <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" class="google-icon">
+      Sign in with Google
+    </a>
+
+    <div class="message" id="msg"></div>
+    <p class="login-link">New user? <a href="register.html">Register here</a></p>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+      const msg = document.getElementById("msg");
+      msg.textContent = "";
+      msg.classList.remove("error", "success");
+
+      fetch("http://localhost:8080/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      })
+      .then(response => {
+        if (response.ok) {
+          localStorage.setItem("username", username);
+          msg.classList.add("success");
+          msg.textContent = "Login successful! Redirecting...";
+          setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 1500);
+        } else {
+          return response.text().then(text => {
+            msg.classList.add("error");
+            msg.textContent = text;
+          });
+        }
+      })
+      .catch(error => {
+        msg.classList.add("error");
+        msg.textContent = "Something went wrong! Please try again later.";
+        console.error("Error:", error);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Question - TechyWorld Admin</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #e3f2fd, #bbdefb);
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      background-color: #0d47a1;
+      color: white;
+      padding: 12px 30px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-circle {
+      background: white;
+      color: #0d47a1;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    nav h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .form-section {
+      display: flex;
+      justify-content: center;
+      padding: 60px 20px;
+      min-height: calc(100vh - 80px);
+    }
+
+    .form-container {
+      background: #ffffff;
+      padding: 25px 30px;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      max-width: 480px;
+      width: 100%;
+    }
+
+    h2 {
+      color: #0d47a1;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 12px;
+      display: block;
+      color: #0d47a1;
+      font-size: 0.92rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 6px 9px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #90caf9;
+      font-size: 0.9rem;
+      background: #e3f2fd;
+      transition: border 0.3s;
+    }
+
+    textarea {
+      min-height: 60px;
+    }
+
+    input:focus, textarea:focus {
+      border: 1.5px solid #1976d2;
+      outline: none;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 9px;
+      background-color: #1976d2;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #0d47a1;
+      transform: translateY(-1.5px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 16px;
+      color: #444;
+      font-size: 0.9rem;
+      background: #e3f2fd;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo-circle">TW</div>
+    <h1>TechyWorld Admin Panel</h1>
+  </nav>
+
+  <div class="form-section">
+    <div class="form-container">
+      <h2>Add New Question</h2>
+
+      <form id="addQuestionForm">
+        <label>Question Text:</label>
+        <textarea id="question" required></textarea>
+
+        <label>Option A:</label>
+        <input type="text" id="optionA" required>
+
+        <label>Option B:</label>
+        <input type="text" id="optionB" required>
+
+        <label>Option C:</label>
+        <input type="text" id="optionC" required>
+
+        <label>Option D:</label>
+        <input type="text" id="optionD" required>
+
+        <label>Correct Answer:</label>
+        <input type="text" id="correctAnswer" required>
+
+        <label>Subject:</label>
+        <input type="text" id="subject" required>
+
+        <label>Marks (Default 5):</label>
+        <input type="number" id="marks" value="5" min="1" required>
+
+        <button type="submit">➕ Add Question</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>&copy; 2025 TechyWorld. All Rights Reserved.</footer>
+
+  <script>
+    document.getElementById("addQuestionForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const questionData = {
+        questionText: document.getElementById("question").value,
+        option1: document.getElementById("optionA").value,
+        option2: document.getElementById("optionB").value,
+        option3: document.getElementById("optionC").value,
+        option4: document.getElementById("optionD").value,
+        correctAnswer: document.getElementById("correctAnswer").value,
+        subject: document.getElementById("subject").value,
+        marks: parseInt(document.getElementById("marks").value)
+      };
+
+      try {
+        const response = await fetch("http://localhost:8080/api/questions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(questionData)
+        });
+
+        if (!response.ok) throw new Error("Failed to add question");
+
+        alert("✅ Question added successfully!");
+        window.location.href = "view-questions.html";
+      } catch (error) {
+        alert("❌ Error: " + error.message);
+      }
+    });
+  </script>
+
+</body>
+</html>

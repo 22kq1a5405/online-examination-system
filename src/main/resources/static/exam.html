@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exam - TechyWorld</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    }
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    h2 { color: #0d47a1; margin-bottom: 20px; }
+    .question { margin-bottom: 20px; }
+    label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    button {
+      padding: 10px 24px;
+      background-color: #1976d2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+    button:hover { background-color: #0d47a1; }
+    .nav-btns {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    #submitBtn {
+      width: 100%;
+      margin-top: 30px;
+      background-color: #43a047;
+    }
+    #submitBtn:hover {
+      background-color: #2e7d32;
+    }
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #28a745;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 14px;
+      position: fixed;
+      z-index: 1000;
+      right: 30px;
+      top: 30px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Aptitude Test</h2>
+  <div id="timer" style="text-align:right; margin-bottom:10px; font-weight:bold;">Time Left: 2:00</div>
+
+  <div id="questionArea"></div>
+
+  <div class="nav-btns">
+    <button onclick="prevQuestion()" id="prevBtn" disabled>Previous</button>
+    <button onclick="nextQuestion()" id="nextBtn">Next</button>
+  </div>
+
+  <button onclick="submitExam()" id="submitBtn" style="display:none;">Submit Exam</button>
+</div>
+
+<!-- Toast -->
+<div id="toast">Submitted Successfully!</div>
+
+<script>
+  let totalTime = 120;
+  let currentQuestionIndex = 0;
+  let questionsData = [];
+  let intervalId;
+
+  fetch("http://localhost:8080/api/questions")
+    .then(res => res.json())
+    .then(data => {
+      questionsData = data;
+      renderQuestion();
+      startTimer();
+    });
+
+  function startTimer() {
+    const timerElement = document.getElementById("timer");
+    intervalId = setInterval(() => {
+      let min = Math.floor(totalTime / 60);
+      let sec = totalTime % 60;
+      timerElement.textContent = `Time Left: ${min}:${sec < 10 ? '0' : ''}${sec}`;
+      totalTime--;
+      if (totalTime < 0) {
+        clearInterval(intervalId);
+        submitExam();
+      }
+    }, 1000);
+  }
+
+  function renderQuestion() {
+    const q = questionsData[currentQuestionIndex];
+    const area = document.getElementById("questionArea");
+    area.innerHTML = `
+      <div class="question">
+        <p>${currentQuestionIndex+1}. ${q.questionText}</p>
+        <label><input type="radio" name="q${q.id}" value="${q.option1}"> ${q.option1}</label>
+        <label><input type="radio" name="q${q.id}" value="${q.option2}"> ${q.option2}</label>
+        <label><input type="radio" name="q${q.id}" value="${q.option3}"> ${q.option3}</label>
+        <label><input type="radio" name="q${q.id}" value="${q.option4}"> ${q.option4}</label>
+      </div>
+    `;
+
+    document.getElementById("prevBtn").disabled = currentQuestionIndex === 0;
+    document.getElementById("nextBtn").style.display = currentQuestionIndex === questionsData.length-1 ? 'none' : 'inline-block';
+    document.getElementById("submitBtn").style.display = currentQuestionIndex === questionsData.length-1 ? 'inline-block' : 'none';
+  }
+
+  function nextQuestion() {
+    currentQuestionIndex++;
+    renderQuestion();
+  }
+
+  function prevQuestion() {
+    currentQuestionIndex--;
+    renderQuestion();
+  }
+
+  function submitExam() {
+    if (confirm("Are you sure you want to submit the exam?")) {
+      clearInterval(intervalId);
+      let score = 0;
+      questionsData.forEach(q => {
+        const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+        if (selected && selected.value === q.correctAnswer) score += 5;
+      });
+      localStorage.setItem("latestScore", score);
+      localStorage.setItem("totalQuestions", questionsData.length * 5);
+
+      showToast();
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 2000);
+    }
+  }
+
+  function showToast() {
+    var x = document.getElementById("toast");
+    x.style.visibility = "visible";
+    setTimeout(function() {
+      x.style.visibility = "hidden";
+    }, 1800);
+  }
+</script>
+
+</body>
+</html>
